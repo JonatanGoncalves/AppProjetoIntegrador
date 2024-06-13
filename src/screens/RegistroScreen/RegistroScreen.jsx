@@ -1,4 +1,4 @@
-import { Image, View } from "react-native";
+import { Image, ImageBackground, View } from "react-native";
 import { Button, Surface, Text, TextInput } from "react-native-paper";
 import { styles } from "../../config/styles";
 import { useState } from "react";
@@ -30,36 +30,36 @@ export default function RegisterScreen() {
     }
   }
   return (
-    <Surface style={styles.container}>
+    <ImageBackground source={require("../../../assets/ImagemFundo.png")} style={styles.container}>
       <View style={styles.container_inner}>
       <Image source={require("../../../assets/ImagemPI.png")} />
       <Text>{"\n"}</Text>
         <TextInput 
-          label="Nome"
           value={nome}
           onChangeText={setNome}
           placeholder="Nome"
           style={styles.input}
+          mode="outlined"
           left={ <TextInput.Icon 
             icon={"account"}
           />}
         />
         <TextInput
-          label="Email"
           value={email}
           onChangeText={setEmail}
-          placeholder="Digite seu e-mail"
+          placeholder="E-mail"
           style={styles.input}
+          mode="outlined"
           left={ <TextInput.Icon 
             icon={"email-outline"}
           />}
         />
         <TextInput
-          label="Senha"
           style={styles.input}
+          mode="outlined"
           value={senha}
           onChangeText={setSenha}
-          placeholder="Digite sua senha"
+          placeholder="Senha"
           secureTextEntry={hidePassword}
           right={ <TextInput.Icon 
             icon= { hidePassword ? "eye" : "eye-off" } 
@@ -70,11 +70,11 @@ export default function RegisterScreen() {
           />}
         />
         <TextInput
-          label="Confirmar Senha"
           style={styles.input}
+          mode="outlined"
           value={confirmarSenha}
           onChangeText={setConfirmarSenha}
-          placeholder="Confirme sua senha"
+          placeholder="Confirmar Senha"
           secureTextEntry={hidePassword}
           right={ <TextInput.Icon 
             icon= { hidePassword ? "eye" : "eye-off" } 
@@ -91,6 +91,6 @@ export default function RegisterScreen() {
           Já possui uma conta?
         </Button>
       </View>
-    </Surface>
+    </ImageBackground>
   );
 }
