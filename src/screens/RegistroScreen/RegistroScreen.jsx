@@ -1,9 +1,10 @@
 import { Image, View } from "react-native";
-import { Button, Icon, Surface, Text, TextInput } from "react-native-paper";
+import { Button, Surface, Text, TextInput } from "react-native-paper";
 import { styles } from "../../config/styles";
 import { useState } from "react";
 
 export default function RegisterScreen() {
+  const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
@@ -33,12 +34,25 @@ export default function RegisterScreen() {
       <View style={styles.container_inner}>
       <Image source={require("../../../assets/ImagemPI.png")} />
       <Text>{"\n"}</Text>
+        <TextInput 
+          label="Nome"
+          value={nome}
+          onChangeText={setNome}
+          placeholder="Nome"
+          style={styles.input}
+          left={ <TextInput.Icon 
+            icon={"account"}
+          />}
+        />
         <TextInput
           label="Email"
           value={email}
           onChangeText={setEmail}
           placeholder="Digite seu e-mail"
           style={styles.input}
+          left={ <TextInput.Icon 
+            icon={"email-outline"}
+          />}
         />
         <TextInput
           label="Senha"
@@ -47,12 +61,13 @@ export default function RegisterScreen() {
           onChangeText={setSenha}
           placeholder="Digite sua senha"
           secureTextEntry={hidePassword}
-          right={
-            <Icon
-              name={hidePassword ? "eye" : "eye-off"}
-              onPress={() => setHidePassword(!hidePassword)}
-            />
-          }
+          right={ <TextInput.Icon 
+            icon= { hidePassword ? "eye" : "eye-off" } 
+            onPress={() => setHidePassword(!hidePassword)}
+          /> }
+          left={ <TextInput.Icon 
+            icon={"lock"}
+          />}
         />
         <TextInput
           label="Confirmar Senha"
@@ -61,17 +76,18 @@ export default function RegisterScreen() {
           onChangeText={setConfirmarSenha}
           placeholder="Confirme sua senha"
           secureTextEntry={hidePassword}
-          right={
-            <Icon
-              name={hidePassword ? "eye" : "eye-off"}
-              onPress={() => setHidePassword(!hidePassword)}
-            />
-          }
+          right={ <TextInput.Icon 
+            icon= { hidePassword ? "eye" : "eye-off" } 
+            onPress={() => setHidePassword(!hidePassword)}
+          /> }
+          left={ <TextInput.Icon 
+            icon={"lock"}
+          />}
         />
         <Text>{"\n"}</Text>
-        <Button style={styles.button} mode="contained" onPress={handleRegister}>Registrar-se</Button>
+        <Button style={styles.button} textColor="#FFF" mode="outlined" onPress={handleRegister}>REGISTRAR-SE</Button>
         <Text>{"\n"}</Text>
-        <Button  mode="text" onPress={() => navigation.navigate("LoginScreen")}>
+        <Button textColor="#FFF" mode="text" onPress={() => navigation.navigate("LoginScreen")}>
           Já possui uma conta?
         </Button>
       </View>

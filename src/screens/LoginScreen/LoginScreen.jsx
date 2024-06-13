@@ -1,4 +1,4 @@
-import { Button, Icon, Surface, Text, TextInput } from "react-native-paper";
+import { Button, Surface, Text, TextInput } from "react-native-paper";
 import { styles } from "../../config/styles";
 import { Image, View } from "react-native";
 import { useState } from "react";
@@ -32,6 +32,9 @@ export default function LoginScreen({ navigation }) {
           onChangeText={setEmail}
           placeholder="Digite seu e-mail"
           style={styles.input}
+          left={ <TextInput.Icon 
+            icon={"email-outline"}
+          />}
         />
         <TextInput
           label="Senha"
@@ -40,17 +43,18 @@ export default function LoginScreen({ navigation }) {
           onChangeText={setSenha}
           placeholder="Digite sua senha"
           secureTextEntry={hidePassword}
-          right={
-            <Icon
-              name={hidePassword ? "eye" : "eye-off"}
-              onPress={() => setHidePassword(!hidePassword)}
-            />
-          }
+          right={ <TextInput.Icon 
+            icon= { hidePassword ? "eye" : "eye-off" } 
+            onPress={() => setHidePassword(!hidePassword)}
+          /> }
+          left={ <TextInput.Icon 
+            icon={"lock"}
+          />}
         />
         <Text>{"\n"}</Text>
-        <Button mode="contained" onPress={handleLogin}>Logar</Button>
+        <Button textColor="#FFF" mode="outlined" style={styles.button} onPress={handleLogin}>LOGAR</Button>
         <Text>{"\n"}</Text>
-        <Button onPress={() => navigation.navigate("RegisterScreen")}>
+        <Button textColor="#FFF" onPress={() => navigation.navigate("RegisterScreen")}>
           Fazer cadastro
         </Button>
       </View>
