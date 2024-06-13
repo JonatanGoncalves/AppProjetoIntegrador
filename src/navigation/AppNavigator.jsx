@@ -4,7 +4,6 @@ import { Provider } from "react-native-paper";
 import LoginScreen from "../screens/LoginScreen/LoginScreen";
 import RegisterScreen from "../screens/RegistroScreen/RegistroScreen";
 
-
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigator() {

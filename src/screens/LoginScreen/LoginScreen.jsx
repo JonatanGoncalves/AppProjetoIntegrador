@@ -1,25 +1,8 @@
 import { Button, Text, TextInput } from "react-native-paper";
 import { styles } from "../../config/styles";
 import { Image, ImageBackground, View } from "react-native";
-import { useState } from "react";
 
 export default function LoginScreen({ navigation }) {
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-  const [hidePassword, setHidePassword] = useState(true);
-
-  async function handleLogin() {
-    try {
-      const user = await signInWithEmailAndPassword(auth, email, senha);
-      if (user) {
-        console.log("Usuário Logado com sucesso!");
-        navigation.navigate("Home");
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
   return (
     <ImageBackground source={require("../../../assets/ImagemFundo.png")} style={styles.container}>
       <View style={styles.container_inner}>
@@ -51,7 +34,7 @@ export default function LoginScreen({ navigation }) {
           />}
         />
         <Text>{"\n"}</Text>
-        <Button textColor="#FFF" mode="outlined" style={styles.button} onPress={handleLogin}>LOGAR</Button>
+        <Button textColor="#FFF" mode="outlined" style={styles.button}>LOGAR</Button>
         <Text>{"\n"}</Text>
         <Button textColor="#FFF" onPress={() => navigation.navigate("RegisterScreen")}>
           Fazer cadastro
