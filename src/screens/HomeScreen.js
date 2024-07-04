@@ -30,23 +30,7 @@ const Home = ({ navigation }) => {
   return (
     <SafeAreaView className="flex-1 bg-white">
       <ScrollView>
-        <View className="flex-row px-5 mt-6 justify-between items-center">
-          {isLoggedIn &&(
-            <Pressable onPress={() => setModalVisible(!modalVisible)} className="flex-row items-center justify-center border border-slate-400 rounded-full ">
-              <Image
-                source={UserLogo}
-                style={{
-                  height: 40,
-                  width: 40,
-                  backgroundColor: "#aaaaaa",
-                  borderRadius: 50,
-                }}
-                />
-                <Text className="font-semibold py-2 pr-4 pl-2">Teste</Text>
-            </Pressable>
-          )}
-        </View>
-
+        <Text>{"\n\n"}</Text>
         <View className="mt-6 px-5">
           <Text className="font-bold text-2xl">Welcome, <Text className="font-bold text-slate-500">{currentUser?.name}</Text></Text>
           <Text className="font-semibold text-xl text-gray-500">

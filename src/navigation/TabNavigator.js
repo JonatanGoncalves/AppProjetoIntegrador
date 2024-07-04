@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { CartStackNavigator, MainStackNavigator, OrderStackNavigator, ProfileStackNavigator } from './StackNavigator'
+import { CartStackNavigator, LoginStackNavigator, MainStackNavigator, OrderStackNavigator, ProfileStackNavigator } from './StackNavigator'
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 const Tab = createBottomTabNavigator()
@@ -9,20 +9,26 @@ const Tab = createBottomTabNavigator()
 const TabNavigator = () => {
   return (
     <Tab.Navigator 
-        initialRouteName='Home'
+        initialRouteName='Login'
         screenOptions={{
         headerShown:false,
         tabBarShowLabel: false,
         tabBarActiveTintColor: "black",
         tabBarInactiveTintColor: "gray",
         tabBarStyle:{
-            borderTopLeftRadius:40,
-            borderTopRightRadius:40,
-            overflow:"hidden",
+            overflow: "visible",
             backgroundColor:"#fff",
-            height:60
+            height:60,
         }
     }}>
+      <Tab.Screen name='Login' component={LoginStackNavigator} 
+        options={{
+            tabBarStyle: {display: 'none'},
+            tabBarIcon: ({ size, color }) => (
+              <MaterialIcons name="person-add" size={size} color={color} />
+            ),
+        }}
+      />
       <Tab.Screen name='Home'  component={MainStackNavigator} 
         options={{
             tabBarIcon: ({ size, color }) => (

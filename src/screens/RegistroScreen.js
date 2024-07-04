@@ -1,11 +1,11 @@
-import { Image, View } from "react-native";
+import { Image, ImageBackground, View } from "react-native";
 import { Button, Surface, Text, TextInput } from "react-native-paper";
 import { registerWithEmailAndPassword } from "../features/firebase/userAuth";
 import { styles } from "../../styles";
 import { useState, useContext } from "react";
 import AuthContext from "../features/authContext";
 
-export default function RegisterScreen({ navigation }) {
+export default function RegistroScreen({ navigation }) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -34,7 +34,7 @@ export default function RegisterScreen({ navigation }) {
         navigation.navigate("loginscreen");
     }
     return (
-        <Surface style={styles.container}>
+        <ImageBackground source={require("../../assets/ImagemFundo.png")} style={styles.container}>
             <View style={styles.container_inner}>
                 <Image source={require("../../assets/ImagemPI.png")} />
                 <Text>{"\n"}</Text>
@@ -95,6 +95,6 @@ export default function RegisterScreen({ navigation }) {
                     Já possui uma conta?
                 </Button>
             </View>
-        </Surface>
+        </ImageBackground>
     );
 }

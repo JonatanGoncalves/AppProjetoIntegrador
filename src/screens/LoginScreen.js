@@ -1,7 +1,7 @@
 import { Button, Surface, Text, TextInput } from "react-native-paper";
 import { loginWithEmailAndPassword } from "../features/firebase/userAuth";
 import { styles } from "../../styles";
-import { Image, View } from "react-native";
+import { Image, ImageBackground, View } from "react-native";
 import { useState, useEffect, useContext } from "react";
 import AuthContext from "../features/authContext";
 
@@ -21,7 +21,7 @@ export default function LoginScreen({ navigation }) {
             setCurrentUser(res.user)
             setIsLoggedIn(true)
         }
-        navigation.navigate('homescreen');
+        navigation.navigate('Home');
     }
 
     useEffect(() => {
@@ -31,7 +31,7 @@ export default function LoginScreen({ navigation }) {
     }, [currentUser]);
 
     return (
-        <Surface style={styles.container}>
+        <ImageBackground source={require("../../assets/ImagemFundo.png")} style={styles.container}>
             <View style={styles.container_inner}>
                 <Image source={require("../../assets/ImagemPI.png")} />
                 <Text>{"\n"}</Text>
@@ -64,10 +64,10 @@ export default function LoginScreen({ navigation }) {
                 <Text>{"\n"}</Text>
                 <Button textColor="#FFF" mode="outlined" style={styles.button} onPress={handleLogin}>LOGAR</Button>
                 <Text>{"\n"}</Text>
-                <Button textColor="#FFF" onPress={() => navigation.navigate("registerscreen")}>
+                <Button textColor="#FFF" onPress={() => navigation.navigate("registroscreen")}>
                     Fazer cadastro
                 </Button>
             </View>
-        </Surface>
+        </ImageBackground>
     );
 }

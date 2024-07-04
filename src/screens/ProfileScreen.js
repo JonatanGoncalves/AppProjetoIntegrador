@@ -5,7 +5,7 @@ import User from "../../assets/user.png";
 import AuthContext from "../features/authContext";
 import { logout } from "../features/firebase/userAuth";
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ navigation }) => {
   
   const {currentUser,setCurrentUser,isLoggedIn,setIsLoggedIn} = useContext(AuthContext);
 
@@ -16,6 +16,7 @@ const ProfileScreen = () => {
       setIsLoggedIn(false);
       setCurrentUser(null)
     }
+    navigation.navigate("loginscreen");
   }
 
   return (

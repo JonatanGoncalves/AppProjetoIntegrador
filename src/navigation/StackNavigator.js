@@ -8,74 +8,88 @@ import DetailScreen from '../screens/DetailScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import OrderScreen from '../screens/OrderScreen'
 import ProductListScreen from '../screens/ProductListScreen'
-import RegisterScreen from '../screens/RegistroScreen';
+import RegistroScreen from '../screens/RegistroScreen';
 
 const Stack = createStackNavigator()
 
-const MainStackNavigator = () => {
-  return (
-    <Stack.Navigator
-        initialRouteName='loginScreen'
+const LoginStackNavigator = () => {
+    return (<Stack.Navigator
+        initialRouteName='loginscreen'
         screenOptions={{
-            headerStyle:{
-                backgroundColor:"#91c4f8"
+            headerStyle: {
+                backgroundColor: "#91c4f8"
             },
-            headerShown:false
+            headerShown: false
         }}
-        >
+    >
         <Stack.Screen name='loginscreen' component={LoginScreen} />
-        <Stack.Screen name='registerscreen' component={RegisterScreen} />
-        <Stack.Screen name='homescreen' component={HomeScreen} />
-        <Stack.Screen name='detailscreen' component={DetailScreen} />
-        <Stack.Screen name='productlistscreen' component={ProductListScreen} />
+        <Stack.Screen name='registroscreen' component={RegistroScreen} />
     </Stack.Navigator>
-  )
+    )
+}
+
+const MainStackNavigator = () => {
+    return (
+        <Stack.Navigator
+            initialRouteName='homescreen'
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: "#91c4f8"
+                },
+                headerShown: false
+            }}
+        >
+            <Stack.Screen name='homescreen' component={HomeScreen} />
+            <Stack.Screen name='detailscreen' component={DetailScreen} />
+            <Stack.Screen name='productlistscreen' component={ProductListScreen} />
+        </Stack.Navigator>
+    )
 }
 
 const CartStackNavigator = () => {
-   return( <Stack.Navigator
-    initialRouteName='cart-screen'
-    screenOptions={{
-        headerStyle:{
-            backgroundColor:"#91c4f8"
-        },
-        headerShown:false
-    }}
+    return (<Stack.Navigator
+        initialRouteName='cart-screen'
+        screenOptions={{
+            headerStyle: {
+                backgroundColor: "#91c4f8"
+            },
+            headerShown: false
+        }}
     >
         <Stack.Screen name='cart-screen' component={CartScreen} />
     </Stack.Navigator>
-   )
+    )
 }
 
 const ProfileStackNavigator = () => {
-    return( 
-    <Stack.Navigator
-     initialRouteName='profile-screen'
-     screenOptions={{
-         headerStyle:{
-             backgroundColor:"#91c4f8"
-         },
-         headerShown:false
-     }}
-     >
-         <Stack.Screen name='profile-screen' component={ProfileScreen} />
-     </Stack.Navigator>
+    return (
+        <Stack.Navigator
+            initialRouteName='profile-screen'
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: "#91c4f8"
+                },
+                headerShown: false
+            }}
+        >
+            <Stack.Screen name='profile-screen' component={ProfileScreen} />
+        </Stack.Navigator>
     )
- }
+}
 const OrderStackNavigator = () => {
-    return( 
-    <Stack.Navigator
-     initialRouteName='order-screen'
-     screenOptions={{
-         headerStyle:{
-             backgroundColor:"#91c4f8"
-         },
-         headerShown:false
-     }}
-     >
-         <Stack.Screen name='order-screen' component={OrderScreen} />
-     </Stack.Navigator>
+    return (
+        <Stack.Navigator
+            initialRouteName='order-screen'
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: "#91c4f8"
+                },
+                headerShown: false
+            }}
+        >
+            <Stack.Screen name='order-screen' component={OrderScreen} />
+        </Stack.Navigator>
     )
- }
+}
 
-export  {MainStackNavigator,CartStackNavigator,ProfileStackNavigator,OrderStackNavigator}
+export { LoginStackNavigator, MainStackNavigator, CartStackNavigator, ProfileStackNavigator, OrderStackNavigator }
