@@ -8,54 +8,54 @@ const Tab = createBottomTabNavigator()
 
 const TabNavigator = () => {
   return (
-    <Tab.Navigator 
-        initialRouteName='Login'
-        screenOptions={{
-        headerShown:false,
+    <Tab.Navigator
+      initialRouteName='Login'
+      screenOptions={{
+        headerShown: false,
         tabBarShowLabel: false,
         tabBarActiveTintColor: "black",
         tabBarInactiveTintColor: "gray",
-        tabBarStyle:{
-            overflow: "visible",
-            backgroundColor:"#fff",
-            height:60,
+        tabBarStyle: {
+          overflow: "visible",
+          backgroundColor: "#fff",
+          height: 60,
         }
-    }}>
-      <Tab.Screen name='Login' component={LoginStackNavigator} 
+      }}>
+      <Tab.Screen name='Home' component={MainStackNavigator}
         options={{
-            tabBarStyle: {display: 'none'},
-            tabBarIcon: ({ size, color }) => (
-              <MaterialIcons name="person-add" size={size} color={color} />
-            ),
+          tabBarIcon: ({ size, color }) => (
+            <MaterialIcons name="home" size={size} color={color} />
+          ),
         }}
       />
-      <Tab.Screen name='Home'  component={MainStackNavigator} 
+      <Tab.Screen name='Cart' component={CartStackNavigator}
         options={{
-            tabBarIcon: ({ size, color }) => (
-              <MaterialIcons name="home" size={size} color={color} />
-            ),
-          }}
+          tabBarIcon: ({ size, color }) => (
+            <MaterialIcons name="shopping-cart" size={size} color={color} />
+          ),
+        }}
       />
-      <Tab.Screen name='Cart' component={CartStackNavigator} 
-       options={{
-        tabBarIcon: ({ size, color }) => (
-          <MaterialIcons name="shopping-cart" size={size} color={color} />
-        ),
-      }}
+      <Tab.Screen name='Login' component={LoginStackNavigator}
+        options={{
+          tabBarStyle: { display: 'none' },
+          tabBarIcon: ({ size, color }) => (
+            <MaterialIcons name="person-add" size={size} color={color} />
+          ),
+        }}
       />
-      <Tab.Screen name='Order' component={OrderStackNavigator} 
-       options={{
-        tabBarIcon: ({ size, color }) => (
-          <MaterialIcons name="list-alt" size={size} color={color} />
-        ),
-      }}
+      <Tab.Screen name='Order' component={OrderStackNavigator}
+        options={{
+          tabBarIcon: ({ size, color }) => (
+            <MaterialIcons name="list-alt" size={size} color={color} />
+          ),
+        }}
       />
-      <Tab.Screen name='Profile' component={ProfileStackNavigator} 
-       options={{
-        tabBarIcon: ({ size, color }) => (
-          <MaterialIcons name="account-circle" size={size} color={color} />
-        ),
-      }}
+      <Tab.Screen name='Profile' component={ProfileStackNavigator}
+        options={{
+          tabBarIcon: ({ size, color }) => (
+            <MaterialIcons name="account-circle" size={size} color={color} />
+          ),
+        }}
       />
     </Tab.Navigator>
   )
