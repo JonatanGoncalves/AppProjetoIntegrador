@@ -61,12 +61,15 @@ export default function LoginScreen({ navigation }) {
                         icon={"lock"}
                     />}
                 />
-                <Text>{"\n"}</Text>
-                <Button textColor="#FFF" mode="outlined" style={styles.button} onPress={handleLogin}>LOGAR</Button>
-                <Text>{"\n"}</Text>
-                <Button textColor="#FFF" onPress={() => navigation.navigate("registerscreen")}>
-                    Fazer cadastro
-                </Button>
+                <View style={styles.containerLogin}>
+                    <Button textColor="#FFF" mode="outlined" style={styles.button} onPress={handleLogin}>LOGAR</Button>
+                    <Button textColor="#FFF" mode="outlined">
+                        Usar Conta do Google
+                    </Button>
+                    <Button textColor="#FFF" onPress={() => navigation.navigate("registerscreen")}>
+                        Fazer cadastro
+                    </Button>
+                </View>
             </View>
         </Surface>
     );

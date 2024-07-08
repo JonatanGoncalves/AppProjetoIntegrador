@@ -5,10 +5,10 @@ import LoginScreen from '../screens/LoginScreen';
 import HomeScreen from '../screens/HomeScreen'
 import CartScreen from '../screens/CartScreen'
 import DetailScreen from '../screens/DetailScreen'
-import ProfileScreen from '../screens/ProfileScreen'
 import OrderScreen from '../screens/OrderScreen'
 import ProductListScreen from '../screens/ProductListScreen'
 import RegisterScreen from '../screens/RegistroScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Stack = createStackNavigator()
 

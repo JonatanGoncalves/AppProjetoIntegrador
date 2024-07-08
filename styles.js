@@ -22,5 +22,11 @@ export const styles = StyleSheet.create({
   button: {
     borderColor: "#FFFF",
     borderWidth: 2,
+  },
+  containerLogin:{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 5
   }
 });
