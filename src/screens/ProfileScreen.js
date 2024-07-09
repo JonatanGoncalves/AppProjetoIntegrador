@@ -16,7 +16,7 @@ const ProfileScreen = ({ navigation }) => {
       setIsLoggedIn(false);
       setCurrentUser(null)
     }
-    navigation.navigate("loginscreen");
+    navigation.navigate("login");
   }
 
   return (

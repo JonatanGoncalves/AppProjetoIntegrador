@@ -21,7 +21,7 @@ export default function LoginScreen({ navigation }) {
             setCurrentUser(res.user)
             setIsLoggedIn(true)
         }
-        navigation.navigate('Home');
+        navigation.navigate('homeStack');
     }
 
     useEffect(() => {

@@ -42,7 +42,7 @@ export default function RegistroScreen({ navigation }) {
                     label="Nome"
                     value={name}
                     onChangeText={setName}
-                    placeholder="Nome"
+                    placeholder="Digite seu Nome"
                     style={styles.input}
                     left={<TextInput.Icon
                         icon={"account"}
@@ -78,7 +78,7 @@ export default function RegistroScreen({ navigation }) {
                     style={styles.input}
                     value={confirmarSenha}
                     onChangeText={setConfirmarSenha}
-                    placeholder="Confirme sua senha"
+                    placeholder="Repita sua senha"
                     secureTextEntry={hidePassword}
                     right={<TextInput.Icon
                         icon={hidePassword ? "eye" : "eye-off"}

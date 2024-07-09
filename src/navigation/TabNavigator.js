@@ -9,7 +9,6 @@ const Tab = createBottomTabNavigator()
 const TabNavigator = () => {
   return (
     <Tab.Navigator
-      initialRouteName='Login'
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
@@ -32,14 +31,6 @@ const TabNavigator = () => {
         options={{
           tabBarIcon: ({ size, color }) => (
             <MaterialIcons name="shopping-cart" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tab.Screen name='Login' component={LoginStackNavigator}
-        options={{
-          tabBarStyle: { display: 'none' },
-          tabBarIcon: ({ size, color }) => (
-            <MaterialIcons name="person-add" size={size} color={color} />
           ),
         }}
       />

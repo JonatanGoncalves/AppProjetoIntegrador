@@ -7,6 +7,11 @@ import { AuthProvider } from "./src/features/authContext";
 import { ProductProvider } from "./src/features/productContext";
 import { CartProvider } from "./src/features/cartContext";
 import { OrderProvider } from "./src/features/orderContext";
+import { createStackNavigator } from "@react-navigation/stack";
+import LoginScreen from "./src/screens/LoginScreen";
+import { AppNavigator } from "./src/navigation/AppNavigator";
+
+const Stack = createStackNavigator();
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -25,9 +30,11 @@ export default function App() {
       >
         <CartProvider value={{ cartItems, setCartItems }}>
           <OrderProvider value={{ orders, setOrders }}>
-            <NavigationContainer>
-              <TabNavigator />
-            </NavigationContainer>
+            {/* <NavigationContainer>
+              <Stack.Screen name="login" component={LoginScreen} />
+              <TabNavigator/>
+            </NavigationContainer> */}
+            <AppNavigator/>
           </OrderProvider>
         </CartProvider>
       </ProductProvider>
