@@ -1,4 +1,4 @@
-import { Text, View, Image,Pressable,ToastAndroid } from "react-native";
+import { Text, View, Image, Pressable, ToastAndroid } from "react-native";
 import React, { useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import User from "../../assets/user.png";
@@ -8,6 +8,10 @@ import { logout } from "../features/firebase/userAuth";
 const ProfileScreen = ({ navigation }) => {
   
   const {currentUser,setCurrentUser,isLoggedIn,setIsLoggedIn} = useContext(AuthContext);
+
+  const handleShop = () => {
+    navigation.navigate("vendasScreen");
+  }
 
   const handleLogout = async () => {
     const res = await logout()
@@ -33,6 +37,10 @@ const ProfileScreen = ({ navigation }) => {
           <View className="items-center justify-center">
             <Text className="text-lg font-bold">{currentUser?.name}</Text>
             <Text className="text-xs, font-bold text-gray-500">{currentUser?.email}</Text>
+            <Text>{"\n\n\n"}</Text>
+            <Pressable onPress={handleShop} className="bg-black p-3 w-32 right-32 rounded-lg mt-6">
+                <Text className="font-semibold text-white text-center">Minha Loja</Text>
+            </Pressable>
           </View>
           :
           <View className="items-center justify-center">

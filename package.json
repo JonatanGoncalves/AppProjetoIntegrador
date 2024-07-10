@@ -25,6 +25,7 @@
     "expo": "~48.0.18",
     "expo-status-bar": "~1.4.4",
     "expo-image": "~1.0.2",
+    "expo-image-picker": "~14.1.1",
     "expo-web-browser": "~12.1.1",
     "firebase": "^9.22.1",
     "nativewind": "^2.0.11",
