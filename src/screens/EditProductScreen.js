@@ -73,7 +73,6 @@ const EditProductScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 50,
     },
     scrollContainer: {
         padding: 20,
