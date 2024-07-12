@@ -1,5 +1,5 @@
 import { Image, ImageBackground, View } from "react-native";
-import { Button, Surface, Text, TextInput } from "react-native-paper";
+import { Button, Text, TextInput } from "react-native-paper";
 import { registerWithEmailAndPassword } from "../features/firebase/userAuth";
 import { styles } from "../../styles";
 import { useState, useContext } from "react";
