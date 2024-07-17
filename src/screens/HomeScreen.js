@@ -1,19 +1,21 @@
-import { Text, View, Image, ScrollView, Pressable } from "react-native";
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import { Text, View, ScrollView, Pressable } from "react-native";
+import React, {useContext, useEffect} from "react";
 import { TextInput } from "react-native-gesture-handler";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import UserLogo from "../../assets/user.png";
 import OfferCard from "../components/OfferCard";
 import NewArrivalsCard from "../components/NewArrivalsCard";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AuthContext from "../features/authContext";
 import ProductContext from "../features/productContext";
 import { getProducts } from "../features/firebase/product";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage"
 
 const Home = ({ navigation }) => {
-  const [modalVisible, setModalVisible] = useState(false);
   const { isLoggedIn,currentUser} = useContext(AuthContext);
   const {products,setProducts} = useContext(ProductContext);
+  const storage = getStorage(); // Initialize Firebase Storage
+  const db = getFirestore(); // Initialize Firebase Firestore
 
   const fetchAllProducts = async () => {
     const result = await getProducts()
@@ -70,7 +72,7 @@ const Home = ({ navigation }) => {
             <Pressable key={product.id} 
             onPress={() => navigation.navigate("detailscreen",
             {productId:product.id})}>
-              <NewArrivalsCard title={product.title} image={product.image} price={product.price} brand={product.brand} />
+              <NewArrivalsCard name={product.name} images={product.images} price={product.price} brand={product.brand} />
             </Pressable>
               )}
             

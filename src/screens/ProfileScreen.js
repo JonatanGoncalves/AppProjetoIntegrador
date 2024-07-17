@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Text, View, Image, Pressable, ToastAndroid, ProgressBarAndroid } from "react-native";
+import { Text, View, Image, Pressable, ToastAndroid, TextInput } from "react-native";
 import * as ImagePicker from 'expo-image-picker'; // Importando a biblioteca para escolha de imagem
 import { SafeAreaView } from "react-native-safe-area-context";
 import AuthContext from "../features/authContext";
@@ -11,9 +11,14 @@ import { getFirestore, doc, updateDoc } from "firebase/firestore";
 const ProfileScreen = ({ navigation }) => {
   const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const [selectedImage, setSelectedImage] = useState(null); // Estado para armazenar a imagem selecionada
-  const [editName, setEditName] = useState(false); // Estado para controlar edição do nome
+  const [newName, setNewName] = useState(currentUser?.name); // Estado para armazenar o novo nome
+  const [isEditingName, setIsEditingName] = useState(false); // Estado para controlar se o nome está sendo editado
   const storage = getStorage(); // Initialize Firebase Storage
   const db = getFirestore(); // Initialize Firebase Firestore
+
+  const handleShop = () => {
+    navigation.navigate("vendasScreen");
+  }
 
   // Função para selecionar uma imagem da galeria
   const handlePickImage = async () => {
@@ -61,7 +66,7 @@ const ProfileScreen = ({ navigation }) => {
 
       const uploadPromise = new Promise((resolve, reject) => {
         uploadTask.on(
-          'tate_changed',
+          'state_changed',
           async () => {
             // Upload completed successfully
             const url = await getDownloadURL(uploadTask.snapshot.ref);
@@ -112,27 +117,28 @@ const ProfileScreen = ({ navigation }) => {
   }, [isLoggedIn, currentUser]);
 
   const handleSaveName = async () => {
-    if (editName === currentUser?.name) {
+    if (newName === currentUser?.name) {
       ToastAndroid.show('Nenhuma alteração no nome.', ToastAndroid.BOTTOM);
       return;
     }
 
     try {
-      await updateProfile(currentUser, { name: editName });
-      await updateDoc(doc(db, 'users', currentUser.uid), { name: editName });
-      setCurrentUser({ ...currentUser, name: editName });
-      setEditName(false);
+      await updateProfile(currentUser, { name: newName });
+      await updateDoc(doc(db, 'users', currentUser.uid), { name: newName });
+      setCurrentUser({ ...currentUser, name: newName });
+      setIsEditingName(false);
       ToastAndroid.show('Nome atualizado com sucesso!', ToastAndroid.BOTTOM);
     } catch (error) {
       console.error('Erro ao atualizar nome:', error.message);
       ToastAndroid.show('Erro ao atualizar nome.', ToastAndroid.BOTTOM);
     }
   };
+
   const handleSaveChanges = async () => {
     if (selectedImage) {
       await handleSaveImage();
     }
-    if (editName) {
+    if (newName !== currentUser?.name) {
       await handleSaveName();
     }
     ToastAndroid.show('Todas as alterações salvas com sucesso!', ToastAndroid.BOTTOM);
@@ -152,28 +158,27 @@ const ProfileScreen = ({ navigation }) => {
         <View className="mt-6">
           {isLoggedIn ? (
             <View className="items-center justify-center">
-              {editName ? (
-                <View className="flex-row items-center">
-                  <Pressable onPress={() => setEditName(false)} className="mr-2">
-                    <Text className="text-xs font-bold text-gray-500">Cancelar</Text>
-                  </Pressable>
-                  <Pressable onPress={handleSaveName} className="mr-2">
-                    <Text className="text-xs font-bold text-gray-500">Salvar</Text>
-                  </Pressable>
-                  <Text className="text-lg font-bold">{currentUser?.name}</Text>
-                  <Pressable onPress={() => setEditName(true)}>
-                    <Text className="text-xs font-bold text-gray-500"><Text style={{ fontSize: 16, marginRight: 3 }}>✏️</Text></Text>
-                  </Pressable>
-                </View>
-              ) : (
-                <View className="flex-row items-center">
-                  <Text className="text-lg font-bold">{currentUser?.name}</Text>
-                  <Pressable onPress={() => setEditName(true)}>
-                    <Text className="text-xs font-bold text-gray-500"><Text style={{ fontSize: 16, marginRight: 3 }}>✏️</Text></Text>
-                  </Pressable>
-                </View>
-              )}
+              <View>
+                <Pressable onPress={() => setIsEditingName(true)} style={{ right: 0, top: 0, alignSelf: "flex-start" }}>
+
+                  <Text className="text-lg font-bold"><Text className="text-lg font-bold">{currentUser?.name}</Text><Text style={{ fontSize: 16, marginRight: 3 }}>✏️</Text></Text>
+                </Pressable>
+
+
+              </View>
+              {isEditingName ? (
+                <TextInput
+                  value={newName}
+                  onChangeText={(text) => setNewName(text)}
+                  placeholder="Novo nome"
+                  className="w-1/3 p-2 border-hide border-gray-200 rounded-lg"
+                />
+              ) : null}
               <Text className="text-xs font-bold text-gray-500">{currentUser?.email}</Text>
+              <Text>{"\n\n\n"}</Text>
+              <Pressable onPress={handleShop} className="bg-black p-3 w-32 right-32 rounded-lg mt-6">
+                <Text className="font-semibold text-white text-center">Histórico</Text>
+              </Pressable>
             </View>
           ) : (
             <View className="items-center justify-center">

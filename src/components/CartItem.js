@@ -4,7 +4,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 import { removeItemById } from "../features/firebase/cart";
 import CartContext from "../features/cartContext";
 
-const CartItem = ({title,image,price,brand,qty,id}) => {
+const CartItem = ({name,images,price,brand,qty,id}) => {
   const {setCartItems} = useContext(CartContext)
 
 
@@ -20,11 +20,11 @@ const CartItem = ({title,image,price,brand,qty,id}) => {
     <View >
     <View className="flex-row">
       <View className="p-2">
-        <Image source={{uri:image}} className="rounded-xl h-20 w-20 object-contain" />
+        <Image source={{uri:images}} className="rounded-xl h-20 w-20 object-contain" />
       </View>
       <View className="flex-1 flex-row  justify-between items-center w-[100%]  px-4">
         <View className="w-[50%]">
-          <Text className="font-bold" numberOfLines={1}>{title}</Text>
+          <Text className="font-bold" numberOfLines={1}>{name}</Text>
           <Text className="text-xs">{brand}</Text>
           <Text className="font-extrabold">Qty: {qty}</Text>
           <Text className="font-extrabold">${price}</Text>

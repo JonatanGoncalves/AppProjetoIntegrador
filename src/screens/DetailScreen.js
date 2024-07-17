@@ -8,12 +8,15 @@ import { addToCart } from "../features/firebase/cart";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CartContext from "../features/cartContext";
 
+
 // const sizes = ["S", "M", "L", "XL", "XXL"];
 
 const DetailScreen = ({navigation,route}) => {
   const {currentProduct:product,setCurrentProduct}= useContext(ProductContext);
   const {setCartItems}=useContext(CartContext) 
   const id=route.params.productId;
+  const storage = getStorage(); // Initialize Firebase Storage
+  const db = getFirestore(); // Initialize Firebase Firestore
 
   const [qty,setQty]=useState(1);
 
