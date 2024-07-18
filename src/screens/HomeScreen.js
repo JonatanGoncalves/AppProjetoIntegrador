@@ -109,33 +109,6 @@ const Home = ({ navigation }) => {
                 </Pressable>
               )}
             </ScrollView>
-            <ScrollView
-              className="mt-1.5 mb-8"
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-            >
-              {products?.map(product =>
-                <Pressable key={product.id}
-                  onPress={() => navigation.navigate("detailscreen",
-                    { productId: product.id })}>
-                  <NewArrivalsCard title={product.title} image={product.image} price={product.price} brand={product.brand} />
-                </Pressable>
-              )}
-              {products?.map(product =>
-                <Pressable key={product.id}
-                  onPress={() => navigation.navigate("detailscreen",
-                    { productId: product.id })}>
-                  <NewArrivalsCard title={product.title} image={product.image} price={product.price} brand={product.brand} />
-                </Pressable>
-              )}
-              {products?.map(product =>
-                <Pressable key={product.id}
-                  onPress={() => navigation.navigate("detailscreen",
-                    { productId: product.id })}>
-                  <NewArrivalsCard title={product.title} image={product.image} price={product.price} brand={product.brand} />
-                </Pressable>
-              )}
-            </ScrollView>
           </ScrollView>
         </View>
       </ScrollView>

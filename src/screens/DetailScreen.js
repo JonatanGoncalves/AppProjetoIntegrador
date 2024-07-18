@@ -22,7 +22,7 @@ const DetailScreen = ({ navigation, route }) => {
   const addItemToCart = async () => {
     const res = await addToCart(id, qty)
     if (res.success === true) {
-      ToastAndroid.show("item added to cart", ToastAndroid.BOTTOM)
+      ToastAndroid.show("item adicionado ao carrinho", ToastAndroid.BOTTOM)
       setCartItems(res.data)
     }
   }

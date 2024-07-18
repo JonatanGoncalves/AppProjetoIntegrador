@@ -16,7 +16,7 @@ const ProfileScreen = ({ navigation }) => {
   const handleLogout = async () => {
     const res = await logout()
     if(res.success===true){
-      ToastAndroid.show("Logged Out Successfully",ToastAndroid.BOTTOM)
+      ToastAndroid.show("Desconectado com Sucesso",ToastAndroid.BOTTOM)
       setIsLoggedIn(false);
       setCurrentUser(null)
     }
@@ -44,7 +44,7 @@ const ProfileScreen = ({ navigation }) => {
           </View>
           :
           <View className="items-center justify-center">
-            <Text className="text-lg font-bold">Login to view your Profile!</Text>
+            <Text className="text-lg font-bold">Login para ver seu Perfil!</Text>
           </View>
           }
         </View>

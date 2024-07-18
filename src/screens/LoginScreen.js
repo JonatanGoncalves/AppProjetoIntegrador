@@ -1,4 +1,4 @@
-import { Button, Surface, Text, TextInput } from "react-native-paper";
+import { Button, Text, TextInput } from "react-native-paper";
 import { loginWithEmailAndPassword } from "../features/firebase/userAuth";
 import { styles } from "../../styles";
 import { Image, ImageBackground, View } from "react-native";
@@ -10,7 +10,7 @@ export default function LoginScreen({ navigation }) {
     const [password, setPassword] = useState("");
     const [hidePassword, setHidePassword] = useState(true);
 
-    const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } =
+    const { currentUser, setCurrentUser, setIsLoggedIn } =
     useContext(AuthContext);
 
     async function handleLogin() {

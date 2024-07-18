@@ -1,5 +1,4 @@
-import { Image, Pressable, SafeAreaView, ScrollView, Text, View } from "react-native"
-import User from "../../assets/user.png";
+import { Pressable, SafeAreaView, ScrollView, Text, View } from "react-native"
 import ProductContext from "../features/productContext";
 import { useContext } from "react";
 import NewArrivalsCard from "../components/NewArrivalsCard";

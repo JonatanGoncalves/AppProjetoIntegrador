@@ -1,6 +1,7 @@
-import { Pressable, View, ScrollView, Text } from "react-native";
+import { Pressable, ScrollView } from "react-native";
 import React, { useEffect, useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { getProducts } from "../features/firebase/product";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import ProductItem from "../components/ProductItem";
 import ProductContext from "../features/productContext";
@@ -20,7 +21,7 @@ const ProductListScreen = ({ navigation }) => {
   useEffect(() => {
     navigation.setOptions({
       headerShown: true,
-      headerTitle: "Products",
+      headerTitle: "Produtos",
       headerLeft: () => (
         <Pressable
           onPress={goBack}

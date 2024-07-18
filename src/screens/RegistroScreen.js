@@ -12,7 +12,7 @@ export default function RegistroScreen({ navigation }) {
     const [confirmarSenha, setConfirmarSenha] = useState("");
     const [hidePassword, setHidePassword] = useState(true);
 
-    const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } =
+    const { setCurrentUser, setIsLoggedIn } =
     useContext(AuthContext);
 
     async function handleRegister() {
