@@ -12,8 +12,8 @@ import { getProducts } from "../features/firebase/product";
 
 const Home = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const { isLoggedIn,currentUser} = useContext(AuthContext);
-  const {products,setProducts} = useContext(ProductContext);
+  const { isLoggedIn, currentUser } = useContext(AuthContext);
+  const { products, setProducts } = useContext(ProductContext);
 
   const fetchAllProducts = async () => {
     const result = await getProducts()
@@ -31,16 +31,15 @@ const Home = ({ navigation }) => {
     <SafeAreaView className="flex-1 bg-white">
       <ScrollView>
         <Text>{"\n\n"}</Text>
-        <View className="mt-6 px-5">
-          <Text className="font-bold text-2xl">Welcome, <Text className="font-bold text-slate-500">{currentUser?.name}</Text></Text>
+        <View className="mb-10 px-5">
+          <Text className="font-bold text-2xl">Bem Vindo(a), <Text className="font-bold text-slate-500">{currentUser?.name}</Text></Text>
           <Text className="font-semibold text-xl text-gray-500">
-            Our Fashions App
+            Ao Kjave App
           </Text>
         </View>
-
-        <View className="mt-6 px-5">
+        <View className="px-5">
           <View className="flex-row bg-gray-200 p-2 px-3 items-center rounded-3xl">
-            <View className="">
+            <View>
               <MaterialIcons name="search" size={24} color={"#111"} />
             </View>
             <TextInput
@@ -50,30 +49,96 @@ const Home = ({ navigation }) => {
             />
           </View>
         </View>
-
-        <View className="mt-6 p-5">
-          <OfferCard />
-        </View>
-        <View className="mt-4">
+        <View className="mt-12">
           <View className="flex-row justify-between items-center px-5">
-            <Text className="text-lg font-extrabold">New Arrivals</Text>
+            <Text className="text-lg font-extrabold">Recomendados</Text>
             <Pressable onPress={() => navigation.navigate("productlistscreen")}>
-              <Text className="text-xs text-gray-500">View All</Text>
+              <Text className="text-xs text-gray-500">Ver Tudo</Text>
             </Pressable>
           </View>
-          <ScrollView
-            className="mt-4 ml-5"
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-          >
-            {products?.map(product=>
-            <Pressable key={product.id} 
-            onPress={() => navigation.navigate("detailscreen",
-            {productId:product.id})}>
-              <NewArrivalsCard title={product.title} image={product.image} price={product.price} brand={product.brand} />
-            </Pressable>
+          <ScrollView>
+
+            <ScrollView
+              className="mt-1.5"
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+              {products?.map(product =>
+                <Pressable key={product.id}
+                  onPress={() => navigation.navigate("detailscreen",
+                    { productId: product.id })}>
+                  <NewArrivalsCard title={product.title} image={product.image} price={product.price} brand={product.brand} />
+                </Pressable>
               )}
-            
+              {products?.map(product =>
+                <Pressable key={product.id}
+                  onPress={() => navigation.navigate("detailscreen",
+                    { productId: product.id })}>
+                  <NewArrivalsCard title={product.title} image={product.image} price={product.price} brand={product.brand} />
+                </Pressable>
+              )}
+              {products?.map(product =>
+                <Pressable key={product.id}
+                  onPress={() => navigation.navigate("detailscreen",
+                    { productId: product.id })}>
+                  <NewArrivalsCard title={product.title} image={product.image} price={product.price} brand={product.brand} />
+                </Pressable>
+              )}
+            </ScrollView>
+            <ScrollView
+              className="mt-1.5"
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+              {products?.map(product =>
+                <Pressable key={product.id}
+                  onPress={() => navigation.navigate("detailscreen",
+                    { productId: product.id })}>
+                  <NewArrivalsCard title={product.title} image={product.image} price={product.price} brand={product.brand} />
+                </Pressable>
+              )}
+              {products?.map(product =>
+                <Pressable key={product.id}
+                  onPress={() => navigation.navigate("detailscreen",
+                    { productId: product.id })}>
+                  <NewArrivalsCard title={product.title} image={product.image} price={product.price} brand={product.brand} />
+                </Pressable>
+              )}
+              {products?.map(product =>
+                <Pressable key={product.id}
+                  onPress={() => navigation.navigate("detailscreen",
+                    { productId: product.id })}>
+                  <NewArrivalsCard title={product.title} image={product.image} price={product.price} brand={product.brand} />
+                </Pressable>
+              )}
+            </ScrollView>
+            <ScrollView
+              className="mt-1.5 mb-8"
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+              {products?.map(product =>
+                <Pressable key={product.id}
+                  onPress={() => navigation.navigate("detailscreen",
+                    { productId: product.id })}>
+                  <NewArrivalsCard title={product.title} image={product.image} price={product.price} brand={product.brand} />
+                </Pressable>
+              )}
+              {products?.map(product =>
+                <Pressable key={product.id}
+                  onPress={() => navigation.navigate("detailscreen",
+                    { productId: product.id })}>
+                  <NewArrivalsCard title={product.title} image={product.image} price={product.price} brand={product.brand} />
+                </Pressable>
+              )}
+              {products?.map(product =>
+                <Pressable key={product.id}
+                  onPress={() => navigation.navigate("detailscreen",
+                    { productId: product.id })}>
+                  <NewArrivalsCard title={product.title} image={product.image} price={product.price} brand={product.brand} />
+                </Pressable>
+              )}
+            </ScrollView>
           </ScrollView>
         </View>
       </ScrollView>

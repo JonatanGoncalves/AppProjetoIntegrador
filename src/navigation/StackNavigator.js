@@ -10,6 +10,7 @@ import OrderScreen from '../screens/OrderScreen'
 import ProductListScreen from '../screens/ProductListScreen'
 import RegistroScreen from '../screens/RegistroScreen';
 
+
 const Stack = createStackNavigator()
 
 const LoginStackNavigator = () => {
