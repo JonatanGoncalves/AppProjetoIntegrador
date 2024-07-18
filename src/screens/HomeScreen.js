@@ -1,9 +1,7 @@
-import { Text, View, Image, ScrollView, Pressable } from "react-native";
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import { Text, View, ScrollView, Pressable } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
 import { TextInput } from "react-native-gesture-handler";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import UserLogo from "../../assets/user.png";
-import OfferCard from "../components/OfferCard";
 import NewArrivalsCard from "../components/NewArrivalsCard";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AuthContext from "../features/authContext";
@@ -11,8 +9,7 @@ import ProductContext from "../features/productContext";
 import { getProducts } from "../features/firebase/product";
 
 const Home = ({ navigation }) => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const { isLoggedIn, currentUser } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
   const { products, setProducts } = useContext(ProductContext);
 
   const fetchAllProducts = async () => {

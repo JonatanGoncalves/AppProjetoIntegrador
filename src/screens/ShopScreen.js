@@ -12,13 +12,7 @@ const ShopScreen = ({ navigation }) => {
     }
 
     return (
-        <SafeAreaView>
-            <View className="mt-8 flex space-x-10 flex-row items-center ml-20">
-                <View className="border border-slate-200 rounded-lg">
-                    <Image source={User} className="h-24 w-24 object-cover" />
-                </View>
-                <Text className="text-xl font-bold">Loja Teste</Text>
-            </View>
+        <SafeAreaView className="bg-white">
             <Text>{"\n\n"}</Text>
             <View className="flex flex-row gap-4 self-center">
                 <View className="items-center border p-2.5 rounded-xl">
@@ -55,7 +49,7 @@ const ShopScreen = ({ navigation }) => {
             </View>
             <Text>{"\n\n\n\n\n\n"}</Text>
             <View>
-                <Pressable onPress={handleAdd} className="bg-black w-3/4 left-12 py-4 rounded-lg mt-10">
+                <Pressable onPress={handleAdd} className="bg-black w-3/4 left-12 py-4 rounded-lg mb-28 mt-36">
                     <Text className="font-semibold text-white text-center">Publicar novo Produto</Text>
                 </Pressable>
             </View>
