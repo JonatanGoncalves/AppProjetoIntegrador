@@ -44,8 +44,8 @@ const ProductListScreen = ({ navigation }) => {
             productId:product?.id
           })}>
             <ProductItem
-              title={product?.title}
-              image={product?.image}
+              title={product?.name}
+              image={product?.images}
               price={product?.price}
               brand={product?.brand}
             />
