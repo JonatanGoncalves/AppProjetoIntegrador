@@ -15,17 +15,6 @@ const DetailScreen = ({ navigation, route }) => {
   const { setCartItems } = useContext(CartContext)
   const id = route.params.productId;
 
-  const [qty, setQty] = useState(1);
-
-  const increment = () => {
-    setQty(prev => prev + 1)
-  }
-  const decrement = () => {
-    if (qty > 1) {
-      setQty(prev => prev - 1)
-    }
-  }
-
   const goBack = () => {
     navigation.goBack()
   }
