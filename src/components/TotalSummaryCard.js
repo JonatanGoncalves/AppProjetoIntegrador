@@ -20,11 +20,11 @@ const TotalSummaryCard = ({totalPrice}) => {
   return (
     <View className="border border-gray-200 rounded-lg p-6">
       <View className="flex-row justify-between items-center">
-        <Text className="font-bold text-lg">Total Price:</Text>
+        <Text className="font-bold text-lg">Preço Total:</Text>
         <Text className="font-extrabold text-xl">${totalPrice}</Text>
       </View>
       <Pressable onPress={placeOrder} className="bg-black py-4 rounded-lg mt-6">
-        <Text className="font-semibold text-white text-center">Place Order</Text>
+        <Text className="font-semibold text-white text-center">Faça a Encomenda</Text>
       </Pressable>
     </View>
   );
