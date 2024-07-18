@@ -28,7 +28,7 @@ const OrderScreen = ({ navigation }) => {
   return (
     <SafeAreaView className="flex-1 w-full p-5 bg-white">
       <View>
-        <Text className="font-bold text-xl">My Orders</Text>
+        <Text className="font-bold text-xl">Minha Lista de Desejos</Text>
       </View>
       {isLoggedIn
       ?
@@ -41,7 +41,7 @@ const OrderScreen = ({ navigation }) => {
       </ScrollView>
       :
       <View className="flex-1 items-center justify-center ">
-        <Text className="font-bold text-lg">Login to view your Orders!</Text>
+        <Text className="font-bold text-lg">Login para ver sua Lista De Desejos!</Text>
       </View>
         }
     </SafeAreaView>

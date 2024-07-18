@@ -39,7 +39,7 @@ const ProfileScreen = ({ navigation }) => {
             <Text className="text-xs, font-bold text-gray-500">{currentUser?.email}</Text>
             <Text>{"\n\n\n"}</Text>
             <Pressable onPress={handleShop} className="bg-black p-3 w-32 right-32 rounded-lg mt-6">
-                <Text className="font-semibold text-white text-center">Minha Loja</Text>
+                <Text className="font-semibold text-white text-center">Histórico</Text>
             </Pressable>
           </View>
           :
@@ -53,7 +53,7 @@ const ProfileScreen = ({ navigation }) => {
         <View className="justify-center items-center">
           <Pressable onPress={handleLogout} className="bg-black w-full py-4
            rounded-lg">
-            <Text className="font-bold text-white text-center">Log Out</Text>
+            <Text className="font-bold text-white text-center">Desconectar-se</Text>
           </Pressable>
         </View>
         }

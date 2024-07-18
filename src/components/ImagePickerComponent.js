@@ -1,86 +1,126 @@
-import React from 'react';
-import { View, Image, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { View, Image, TouchableOpacity, StyleSheet, Modal, Text, Button } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Ionicons } from '@expo/vector-icons';
 
 const ImagePickerComponent = ({ image, onChangeImage }) => {
-    const openPickerOptions = () => {
-        Alert.alert(
-            'Adicionar Imagem',
-            'Escolha uma opção',
-            [
-                {
-                    text: 'Usar Câmera',
-                    onPress: pickImageFromCamera,
-                },
-                {
-                    text: 'Escolher da Galeria',
-                    onPress: pickImageFromGallery,
-                },
-                {
-                    text: 'Cancelar',
-                    style: 'cancel',
-                },
-            ],
-            { cancelable: true }
-        );
-    };
+    const [modalVisible, setModalVisible] = useState(false);
 
-    const pickImageFromCamera = async () => {
-        const { status } = await ImagePicker.requestCameraPermissionsAsync();
-        if (status !== 'granted') {
-            Alert.alert('Permissão Negada', 'Precisamos de permissão para usar a câmera');
-            return;
+    const handleAddPhoto = async (source) => {
+        let result;
+        if (source === 'camera') {
+            const { status } = await ImagePicker.requestCameraPermissionsAsync();
+            if (status === 'granted') {
+                result = await ImagePicker.launchCameraAsync({
+                    mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                    allowsEditing: true,
+                    aspect: [4, 3],
+                    quality: 1,
+                });
+            }
+        } else if (source === 'library') {
+            const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+            if (status === 'granted') {
+                result = await ImagePicker.launchImageLibraryAsync({
+                    mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                    allowsEditing: true,
+                    aspect: [4, 3],
+                    quality: 1,
+                });
+            }
         }
 
-        let result = await ImagePicker.launchCameraAsync({
-            allowsEditing: true,
-            aspect: [1, 1],
-            quality: 1,
-        });
-
-        if (!result.canceled) {
-            onChangeImage(result.uri);
+        if (!result?.canceled) {
+            onChangeImage(result.assets[0].uri);
         }
-    };
-
-    const pickImageFromGallery = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            allowsEditing: true,
-            aspect: [1, 1],
-            quality: 1,
-        });
-
-        if (!result.canceled) {
-            onChangeImage(result.uri);
-        }
+        setModalVisible(false);
     };
 
     return (
-        <TouchableOpacity style={styles.imageBox} onPress={openPickerOptions}>
-            {image ? (
-                <Image source={{ uri: image }} style={styles.image} />
-            ) : (
-                <Ionicons name="camera" size={32} color="gray" />
-            )}
-        </TouchableOpacity>
+        <View>
+            <TouchableOpacity
+                style={styles.container}
+                onPress={() => setModalVisible(true)}
+            >
+                {image ? (
+                    <Image source={{ uri: image }} style={styles.image} />
+                ) : (
+                    <View style={styles.iconContainer}>
+                        <Ionicons name="camera" size={30} color="black" />
+                    </View>
+                )}
+            </TouchableOpacity>
+
+            <Modal
+                visible={modalVisible}
+                transparent={true}
+                animationType="slide"
+                onRequestClose={() => setModalVisible(false)}
+            >
+                <View style={styles.modalBackground}>
+                    <View style={styles.modalContainer}>
+                        <Text style={styles.modalTitle}>Escolha a origem da foto</Text>
+                        <View style={styles.buttonContainer}>
+                            <Button title="Tirar Foto" onPress={() => handleAddPhoto('camera')} color="#007BFF" />
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <Button title="Escolher da Galeria" onPress={() => handleAddPhoto('library')} color="#007BFF" />
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <Button title="Cancelar" onPress={() => setModalVisible(false)} color="#ff4d4d" />
+                        </View>
+                    </View>
+                </View>
+            </Modal>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
-    imageBox: {
-        width: 80,
-        height: 80,
-        borderWidth: 1,
-        borderColor: '#ccc',
+    container: {
+        width: 100,  // Tamanho do quadradinho
+        height: 100, // Tamanho do quadradinho
+        backgroundColor: '#f8f8f8',  // Fundo mais claro para um visual mais clean
+        borderRadius: 10,
+        borderWidth: 2,  // Borda sutil
+        borderColor: '#ddd',
         justifyContent: 'center',
         alignItems: 'center',
-        marginRight: 10,
+        margin: 5,  // Espaçamento entre quadradinhos
     },
     image: {
         width: '100%',
         height: '100%',
+        borderRadius: 10,
+    },
+    iconContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        height: '100%',
+    },
+    modalBackground: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.3)',  // Fundo do modal mais escuro
+    },
+    modalContainer: {
+        width: 300,
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        padding: 20,
+        alignItems: 'center',
+        elevation: 10,  // Sombra para um visual mais moderno
+    },
+    modalTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 20,
+    },
+    buttonContainer: {
+        width: '100%',
+        marginVertical: 5,
     },
 });
 

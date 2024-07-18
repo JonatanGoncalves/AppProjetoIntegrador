@@ -38,7 +38,7 @@ const Cart = ({ navigation }) => {
   return (
     <SafeAreaView className="flex-1 w-full p-5 bg-white">
       <View>
-        <Text className="font-bold text-xl">My Cart</Text>
+        <Text className="font-bold text-xl">Meu Carrinho</Text>
       </View>
       {isLoggedIn ? (
           <ScrollView className="mt-4 " showsVerticalScrollIndicator={false}>
@@ -57,7 +57,7 @@ const Cart = ({ navigation }) => {
 
       ) : (
         <View className="flex-1 items-center justify-center ">
-          <Text className="font-bold text-lg">Login to view your Cart!</Text>
+          <Text className="font-bold text-lg">Login para ver seu Carrinho!</Text>
         </View>
       )}
           <View>
