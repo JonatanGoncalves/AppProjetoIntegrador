@@ -60,7 +60,7 @@ const ProfileScreen = ({ navigation }) => {
     }
 
     try {
-      const imageRef = ref(storage, `users/${currentUser.uid}`);
+      const imageRef = ref(storage, `users/${currentUser?.uid}`);
       const blob = await fetch(selectedImage).then(res => res.blob());
       const uploadTask = uploadBytes(imageRef, blob);
 
@@ -71,20 +71,17 @@ const ProfileScreen = ({ navigation }) => {
             // Upload completed successfully
             const url = await getDownloadURL(uploadTask.snapshot.ref);
 
-            // Atualiza o perfil do usuário no Firebase Auth
+            // Update user profile
             await updateProfile(currentUser, { photoURL: url });
 
-            // Atualiza o documento do usuário no Firestore
-            const userDocRef = doc(db, 'users', currentUser.uid);
+            // Update user document
+            const userDocRef = doc(db, 'users', currentUser?.uid);
             await updateDoc(userDocRef, { profileImage: url });
 
-            // Atualiza o estado do usuário localmente
-            setCurrentUser({
-              ...currentUser,
-              photoURL: url,
-            });
+            // Update local user state
+            setCurrentUser({ ...currentUser, photoURL: url });
 
-            // Mostra a mensagem de sucesso
+            // Show success message
             ToastAndroid.show('Imagem de perfil salva com sucesso no perfil!', ToastAndroid.BOTTOM);
             resolve(url);
           }
@@ -100,12 +97,11 @@ const ProfileScreen = ({ navigation }) => {
   // Função para recuperar a imagem de perfil do Firebase Storage
   const fetchProfileImage = async () => {
     try {
-      const imageRef = ref(storage, `users/${currentUser.uid}`);
+      const imageRef = ref(storage, `users/${currentUser?.uid}`);
       const url = await getDownloadURL(imageRef);
       setSelectedImage(url); // Define o URI da imagem no estado
     } catch (error) {
-      console.error('Erro ao recuperar imagem:', error.message);
-      ToastAndroid.show('Erro ao recuperar imagem.', ToastAndroid.BOTTOM);
+ 
     }
   };
 
@@ -124,7 +120,7 @@ const ProfileScreen = ({ navigation }) => {
 
     try {
       await updateProfile(currentUser, { name: newName });
-      await updateDoc(doc(db, 'users', currentUser.uid), { name: newName });
+      await updateDoc(doc(db, 'users', currentUser?.uid), { name: newName });
       setCurrentUser({ ...currentUser, name: newName });
       setIsEditingName(false);
       ToastAndroid.show('Nome atualizado com sucesso!', ToastAndroid.BOTTOM);
@@ -182,7 +178,6 @@ const ProfileScreen = ({ navigation }) => {
             </View>
           ) : (
             <View className="items-center justify-center">
-              <Text className="text-lg font-bold">Login para ver seu perfil!</Text>
             </View>
           )}
         </View>

@@ -2,7 +2,6 @@ import { StyleSheet, Text, View,Image } from 'react-native';
 import { useState, useEffect } from 'react';
 import React from 'react'
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
-import Bag from "../../assets/bag.png"
 
 const NewArrivalsCard = ({ name, brand, price, images }) => {
   const [imageUrl, setImageUrl] = useState(null);

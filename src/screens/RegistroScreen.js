@@ -31,7 +31,7 @@ export default function RegistroScreen({ navigation }) {
             setIsLoggedIn(true)
         }
         console.log("Usuário registrado com sucesso!");
-        navigation.navigate("loginscreen");
+        navigation.navigate("login");
     }
     return (
         <ImageBackground source={require("../../assets/ImagemFundo.png")} style={styles.container}>

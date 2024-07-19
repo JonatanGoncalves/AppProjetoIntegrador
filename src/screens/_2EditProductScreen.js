@@ -1,9 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, ScrollView, Text, TouchableOpacity, Alert } from 'react-native';
 import ImagePickerComponent from '../components/ImagePickerComponent';
 import { getFirestore, collection, addDoc, doc, updateDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import AuthContext from '../features/authContext';
 
 const EditProductScreen = ({ navigation }) => {
   const [productName, setProductName] = useState('');
@@ -12,7 +11,6 @@ const EditProductScreen = ({ navigation }) => {
   const [images, setImages] = useState([null, null, null, null]);
   const storage = getStorage(); // Initialize Firebase Storage
   const db = getFirestore(); // Initialize Firebase Firestore
-  const { user } = useContext(AuthContext); // Pegando o usuário logado do contexto de autenticação
 
   const handleImageChange = (index, imageUri) => {
     const newImages = [...images];
@@ -57,7 +55,6 @@ const EditProductScreen = ({ navigation }) => {
         description: productDescription,
         price: productPrice,
         images: uploadedImageUrls,
-        userId: user.uid, // Adiciona o ID do usuário logado
       };
 
       // Salva os dados do produto no Firestore
