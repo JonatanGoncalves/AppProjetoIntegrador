@@ -1,37 +1,29 @@
-import { Button, Surface, Text, TextInput } from "react-native-paper";
-import { loginWithEmailAndPassword } from "../features/firebase/userAuth";
+import { Button, Text, TextInput } from "react-native-paper";
 import { styles } from "../../styles";
-import { Image, View } from "react-native";
+import { Image, ImageBackground, View } from "react-native";
 import { useState, useEffect, useContext } from "react";
-import AuthContext from "../features/authContext";
+import axios from "axios";
+
 
 export default function LoginScreen({ navigation }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [hidePassword, setHidePassword] = useState(true);
 
-    const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } =
-    useContext(AuthContext);
-
     async function handleLogin() {
-        loginWithEmailAndPassword;
-        const res = await loginWithEmailAndPassword(email, password)
-        if (res.success === true) {
-            console.log("res", res)
-            setCurrentUser(res.user)
-            setIsLoggedIn(true)
+        try {
+            const response = await axios.post("https://restfulapi-ecommerce.onrender.com/api/auth/login", { email, password });
+            if (response.status === 200) {
+                alert("Usuário Logado com sucesso!");
+                navigation.navigate("homeStack");
+            }
+        } catch (error) {
+            alert("Erro ao logar usuário: " + error);
         }
-        navigation.navigate('homescreen');
     }
 
-    useEffect(() => {
-        if (currentUser) {
-            setIsLoggedIn(true);
-        }
-    }, [currentUser]);
-
     return (
-        <Surface style={styles.container}>
+        <ImageBackground source={require("../../assets/ImagemFundo.png")} style={styles.container}>
             <View style={styles.container_inner}>
                 <Image source={require("../../assets/ImagemPI.png")} />
                 <Text>{"\n"}</Text>
@@ -64,10 +56,10 @@ export default function LoginScreen({ navigation }) {
                 <Text>{"\n"}</Text>
                 <Button textColor="#FFF" mode="outlined" style={styles.button} onPress={handleLogin}>LOGAR</Button>
                 <Text>{"\n"}</Text>
-                <Button textColor="#FFF" onPress={() => navigation.navigate("registerscreen")}>
+                <Button textColor="#FFF" onPress={() => navigation.navigate("registroscreen")}>
                     Fazer cadastro
                 </Button>
             </View>
-        </Surface>
+        </ImageBackground>
     );
 }

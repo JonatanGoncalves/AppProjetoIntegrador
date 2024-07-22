@@ -1,40 +1,30 @@
-import { Image, View } from "react-native";
-import { Button, Surface, Text, TextInput } from "react-native-paper";
-import { registerWithEmailAndPassword } from "../features/firebase/userAuth";
+import { Image, ImageBackground, View } from "react-native";
+import { Button, Text, TextInput } from "react-native-paper";
 import { styles } from "../../styles";
-import { useState, useContext } from "react";
-import AuthContext from "../features/authContext";
+import { useState } from "react";
+import axios from "axios";
 
-export default function RegisterScreen({ navigation }) {
+export default function RegistroScreen({ navigation }) {
     const [name, setName] = useState("");
+    const [username, setUserName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmarSenha, setConfirmarSenha] = useState("");
     const [hidePassword, setHidePassword] = useState(true);
 
-    const { currentUser, setCurrentUser, isLoggedIn, setIsLoggedIn } =
-    useContext(AuthContext);
-
-    async function handleRegister() {
-        if (password !== confirmarSenha) {
-            alert("Senhas Não São Iguais.");
-            return;
+    async function handleRegister({ navigation }) {
+        try {
+            const response = await axios.post("https://restfulapi-ecommerce.onrender.com/api/user/register", { name, username, email, password });
+            if (response.status === 201) {
+                alert("Usuário cadastrado com sucessoo!");
+                navigation.navigate("loginscreen");
+            }
+        } catch (error) {
+            alert("Erro ao cadastrar usuário: " + error);
         }
-        if (email && password == "") {
-            alert("Por Favor preencha os campos.");
-            return;
-        }
-        registerWithEmailAndPassword;
-        const res = await registerWithEmailAndPassword(name, email, password)
-        if (res.success === true) {
-            setCurrentUser({ name, email })
-            setIsLoggedIn(true)
-        }
-        console.log("Usuário registrado com sucesso!");
-        navigation.navigate("loginscreen");
     }
     return (
-        <Surface style={styles.container}>
+        <ImageBackground source={require("../../assets/ImagemFundo.png")} style={styles.container}>
             <View style={styles.container_inner}>
                 <Image source={require("../../assets/ImagemPI.png")} />
                 <Text>{"\n"}</Text>
@@ -42,7 +32,17 @@ export default function RegisterScreen({ navigation }) {
                     label="Nome"
                     value={name}
                     onChangeText={setName}
-                    placeholder="Nome"
+                    placeholder="Digite seu Nome"
+                    style={styles.input}
+                    left={<TextInput.Icon
+                        icon={"account"}
+                    />}
+                />
+                <TextInput
+                    label="Username"
+                    value={username}
+                    onChangeText={setUserName}
+                    placeholder="Digite seu Nome"
                     style={styles.input}
                     left={<TextInput.Icon
                         icon={"account"}
@@ -78,7 +78,7 @@ export default function RegisterScreen({ navigation }) {
                     style={styles.input}
                     value={confirmarSenha}
                     onChangeText={setConfirmarSenha}
-                    placeholder="Confirme sua senha"
+                    placeholder="Repita sua senha"
                     secureTextEntry={hidePassword}
                     right={<TextInput.Icon
                         icon={hidePassword ? "eye" : "eye-off"}
@@ -95,6 +95,6 @@ export default function RegisterScreen({ navigation }) {
                     Já possui uma conta?
                 </Button>
             </View>
-        </Surface>
+        </ImageBackground>
     );
 }
