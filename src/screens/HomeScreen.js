@@ -52,10 +52,7 @@ const Home = ({ navigation }) => {
             />
           </View>
         </View>
-
-        <View className="mt-6 p-5">
-          <OfferCard />
-        </View>
+        
         <View className="mt-4">
           <View className="flex-row justify-between items-center px-5">
             <Text className="text-lg font-extrabold">New Arrivals</Text>

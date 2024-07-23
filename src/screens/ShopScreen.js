@@ -1,27 +1,30 @@
-import { Image, Pressable, SafeAreaView, ScrollView, Text, View, AsyncStorage } from "react-native";
+import { Image, Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
 import ProductContext from "../features/productContext";
 import NewArrivalsCard from "../components/NewArrivalsCard";
 import { useContext, useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import OrderContext from "../features/orderContext";
+import OrderItem from "../components/OrderItem";
 
 const ShopScreen = ({ navigation }) => {
-  const { setProducts } = useContext(ProductContext);
-  const [localProducts, setLocalProducts] = useState([])
+  const { products, setProducts } = useContext(ProductContext);
+  const { orders, setOrders } = useContext(OrderContext);
   const userId = 'user-123'; // substitua com o ID de usuário real
 
   useEffect(() => {
     AsyncStorage.getItem(`products-${userId}`)
       .then(products => {
         if (products) {
-          setLocalProducts(JSON.parse(products));
+          setProducts(JSON.parse(products));
         } else {
-          setLocalProducts([]);
+          setProducts([]);
         }
       });
   }, [userId]);
 
   useEffect(() => {
-    setProducts(localProducts);
-  }, [localProducts]);
+    setProducts(products);
+  }, [products]);
 
   const handleAdd = () => {
     navigation.navigate("produtoScreen");
@@ -30,40 +33,26 @@ const ShopScreen = ({ navigation }) => {
   const handleSaveProduct = (product) => {
     const newProducts = [...localProducts, product];
     AsyncStorage.setItem(`products-${userId}`, JSON.stringify(newProducts));
-    setLocalProducts(newProducts);
+    setProducts(newProducts);
   }
 
   return (
     <SafeAreaView className="bg-white">
       <Text>{"\n\n"}</Text>
-      <View className="flex flex-row gap-4 self-center">
-        <View className="items-center border p-2.5 rounded-xl">
-          <Text>Anunciados</Text>
-          <Text>0</Text>
-        </View>
-        <View className="items-center p-2.5 pr-6 pl-6 border rounded-xl">
-          <Text>Doados</Text>
-          <Text>0</Text>
-        </View>
-      </View>
-      <Text>{"\n"}</Text>
       <View className="mt-4">
         <View className="flex-row justify-between items-center px-5">
           <Text className="text-lg font-extrabold">Meus Produtos</Text>
-          <Pressable onPress={() => navigation.navigate("productlistscreen")}>
-            <Text className="text-xs text-gray-500">Ver Tudo</Text>
-          </Pressable>
         </View>
         <ScrollView
           className="mt-4 ml-5"
           horizontal={true}
           showsHorizontalScrollIndicator={false}
         >
-          {localProducts?.map(product =>
-            <Pressable key={product.id}
-              onPress={() => navigation.navigate("detailscreen",
-                { productId: product.id })}>
-              <NewArrivalsCard name={product.name} images={product.images} price={product.price} brand={product.brand} />
+          {products?.map(order =>
+            <Pressable>
+              <OrderItem key={order.id} brand={order.brand} qty={order.qty}
+                title={order.title} date={order.date} orderId={order.orderId}
+                image={order.image} price={order.price} />
             </Pressable>
           )}
         </ScrollView>

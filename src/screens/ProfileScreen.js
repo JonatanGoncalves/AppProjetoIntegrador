@@ -140,6 +140,11 @@ const ProfileScreen = ({ navigation }) => {
     ToastAndroid.show('Todas as alterações salvas com sucesso!', ToastAndroid.BOTTOM);
   };
 
+  const handleCancelNameEdit = () => {
+    setNewName(currentUser?.name);
+    setIsEditingName(false);
+  };
+
   return (
     <SafeAreaView className="bg-white h-full p-6 justify-between">
       <View>
@@ -163,12 +168,17 @@ const ProfileScreen = ({ navigation }) => {
 
               </View>
               {isEditingName ? (
-                <TextInput
-                  value={newName}
-                  onChangeText={(text) => setNewName(text)}
-                  placeholder="Novo nome"
-                  className="w-1/3 p-2 border-hide border-gray-200 rounded-lg"
-                />
+                <View className="flex-row items-center">
+                  <TextInput
+                    value={newName}
+                    onChangeText={(text) => setNewName(text)}
+                    placeholder="Novo nome"
+                    className="w-1/3 p-2 border-hide border-gray-200 rounded-lg"
+                  />
+                  <Pressable onPress={handleCancelNameEdit} className="ml-2 bg-gray-200 p-1 rounded-lg">
+                    <Text className="font-bold text-gray-600">Cancelar</Text>
+                  </Pressable>
+                </View>
               ) : null}
               <Text className="text-xs font-bold text-gray-500">{currentUser?.email}</Text>
               <Text>{"\n\n\n"}</Text>
@@ -183,7 +193,7 @@ const ProfileScreen = ({ navigation }) => {
         </View>
       </View>
       {isLoggedIn && (
-        <View className="justify-center items-center">
+        <View className="justify-center items-center">  
           <Pressable onPress={handleLogout} className="bg-black w-full py-4 rounded-lg">
             <Text className="font-bold text-white text-center">Sair</Text>
           </Pressable>
