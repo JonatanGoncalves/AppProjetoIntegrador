@@ -12,17 +12,6 @@ const ShopScreen = ({ navigation }) => {
 
     return (
         <SafeAreaView className="bg-white">
-            <Text>{"\n\n"}</Text>
-            <View className="flex flex-row gap-4 self-center">
-                <View className="items-center border p-2.5 rounded-xl">
-                    <Text>Anunciados</Text>
-                    <Text>20</Text>
-                </View>
-                <View className="items-center p-2.5 pr-6 pl-6 border rounded-xl">
-                    <Text>Doados</Text>
-                    <Text>20</Text>
-                </View>
-            </View>
             <Text>{"\n"}</Text>
             <View className="mt-4">
                 <View className="flex-row justify-between items-center px-5">
@@ -32,23 +21,16 @@ const ShopScreen = ({ navigation }) => {
                     </Pressable>
                 </View>
                 <ScrollView
-                    className="mt-4 ml-5"
+                    className="mt-4 ml-5 mb-40"
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
                 >
-                    {products?.map(product =>
-                        <Pressable key={product.id}
-                            onPress={() => navigation.navigate("detailscreen",
-                                { productId: product.id })}>
-                            <NewArrivalsCard title={product.title} image={product.image} price={product.price} brand={product.brand} />
-                        </Pressable>
-                    )}
-
+                    
                 </ScrollView>
             </View>
             <Text>{"\n\n\n\n\n\n"}</Text>
             <View>
-                <Pressable onPress={handleAdd} className="bg-black w-3/4 left-12 py-4 rounded-lg mb-28 mt-36">
+                <Pressable onPress={handleAdd} className="bg-black w-3/4 left-12 py-4 rounded-lg mb-64 mt-36">
                     <Text className="font-semibold text-white text-center">Publicar novo Produto</Text>
                 </Pressable>
             </View>
